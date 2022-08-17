@@ -16,7 +16,15 @@ extern "C" {
 
 
 const VERSION: &str = "0.01";
+                             
+    ///Checks if all dependencies are installed
+    pub fn init() {
+        if !std::path::Path::new("/lib/libspm.so").exists() {
+            println!("LibSPM missing! Please install it!");
+            println!("From here: https://github.com/Soviet-Linux/CCCP")
+        } 
 
+    }
     /// Gets the current version
     pub fn get_version() -> f32 {
         unsafe {
