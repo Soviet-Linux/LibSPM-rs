@@ -2,7 +2,7 @@
 name = "libspm-rs"
 description = "A rust wrapper for LibSPM"
 repository = "https://github.com/Soviet-Linux/LibSPM-rs"
-license = "GPL3"
+license = "GPL-3.0-or-later"
 version = "0.0.1"
 edition = "2021"
 
