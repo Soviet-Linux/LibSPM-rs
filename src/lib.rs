@@ -1,3 +1,7 @@
+//! `LibSPM-rs` is a rust wrapper for [LibSPM](https://github.com/Soviet-Linux/CCCP)
+//!
+
+
 extern crate libc;
 use std::os::raw::c_float;
 // rust stuff version
@@ -8,26 +12,23 @@ extern "C" {
     fn update();
 }
 
-mod spm {
 //  import libspm.rs
 
 
 const VERSION: &str = "0.01";
 
-
-
+    /// Gets the current version
     pub fn get_version() -> f32 {
         unsafe {
             crate::version()
         }
     }
-
+    /// Cleans work dirs
     pub fn clean_dirs() {
         unsafe {
             crate::clean();
         }
     }
-}
 
 #[cfg(test)]
 mod tests {
@@ -35,13 +36,11 @@ mod tests {
 
     #[test]
     fn version_test() {
-        println!("{}", spm::get_version());
+        println!("{}", get_version());
     }
 
     #[test]
     fn test_update() {
-        unsafe {
-            spm::clean_dirs()
-        }
+            clean_dirs()
     }
 }

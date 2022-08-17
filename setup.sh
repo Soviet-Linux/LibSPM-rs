@@ -1,6 +1,7 @@
-git clone https://git.sovietlinux.ml/sovietlinux/CCCP.git -b rewrite
+git clone https://github.com/Soviet-Linux/CCCP -b rewrite
 cd CCCP
-sudo make libspm
-cp bin/libspm.so /usr/lib/
+mkdir obj bin
+sudo make all
+sudo make install
 cd ..
 rm -rf CCCP
