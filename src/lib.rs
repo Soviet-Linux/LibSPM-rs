@@ -15,7 +15,7 @@ extern "C" {
 
 //  import libspm.rs
 
-const VERSION: &str = "0.01";
+const VERSION: &str = "0.03";
 
 ///Checks if all dependencies are installed
 pub fn init() {
