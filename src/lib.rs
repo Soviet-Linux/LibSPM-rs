@@ -10,6 +10,7 @@ extern "C" {
     fn update();
     // using c_uchar here because String::as_ptr() returns a *const u8 pointer, so it's pretty easy
     fn get(p_name: *const libc::c_uchar, out_path: *const libc::c_uchar);
+    fn uninstall(p_name: *const libc::c_uchar, p_path: *const libc::c_uchar);
 }
 
 //  import libspm.rs
@@ -37,6 +38,13 @@ pub fn clean_dirs() {
 pub fn get_package(package_name: String, out_path: String) {
     unsafe {
         get(package_name.as_ptr(), out_path.as_ptr());
+    }
+}
+
+/// Uninstall a package by name (and path)
+pub fn uninstall_package(package_name: String, package_path: String) {
+    unsafe {
+        uninstall(package_name.as_ptr(), package_path.as_ptr());
     }
 }
 
