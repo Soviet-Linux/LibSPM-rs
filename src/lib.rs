@@ -7,10 +7,15 @@ extern crate libc;
 extern "C" {
     fn version() -> libc::c_float;
     fn clean();
-    fn update();
+//    fn update();
     // using c_uchar here because String::as_ptr() returns a *const u8 pointer, so it's pretty easy
     fn get(p_name: *const libc::c_uchar, out_path: *const libc::c_uchar);
-    fn uninstall(p_name: *const libc::c_uchar, p_path: *const libc::c_uchar);
+
+    fn uninstall(p_name: *const libc::c_uchar);
+    fn installSpmFile(p_path: *const libc::c_uchar,as_dep: libc::c_int);
+
+    fn check(p_name: *const libc::c_uchar) -> libc::c_int;
+
 }
 
 //  import libspm.rs
@@ -42,9 +47,24 @@ pub fn get_package(package_name: String, out_path: String) {
 }
 
 /// Uninstall a package by name (and path)
-pub fn uninstall_package(package_name: String, package_path: String) {
+pub fn uninstall_package(package_name: String) {
     unsafe {
-        uninstall(package_name.as_ptr(), package_path.as_ptr());
+        uninstall(package_name.as_ptr());
+    }
+}
+
+/// Install a package by path
+pub fn install_spm_file(package_path: String, as_dep: bool) {
+    unsafe {
+        installSpmFile(package_path.as_ptr(), as_dep as libc::c_int);
+    }
+}
+
+/// Checks if a package is installed
+/// Returns true if installed, false if not
+pub fn check_package(package_name: String) -> bool {
+    unsafe {
+        return check(package_name.as_ptr()) == 0 
     }
 }
 
@@ -61,10 +81,7 @@ mod tests {
         );
     }
 
-    #[test]
-    fn test_clean() {
-        clean_dirs()
-    }
+
 
     // this test shouldn't be ran as it promps the user for input (which might also cause it to
     // panic or crash)
