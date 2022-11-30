@@ -67,9 +67,9 @@ pub fn install_spm_file(package_path: String, as_dep: bool) {
 
 /// Checks if a package is installed
 /// Returns true if installed, false if not
-pub fn check_package(package_name: String) -> bool {
+pub fn check_package(package_name: String) -> i32 {
     unsafe {
-        return check(package_name.as_ptr()) == 0 
+        return check(package_name.as_ptr()); 
     }
 }
 
