@@ -5,6 +5,8 @@ extern crate libc;
 // rust stuff version
 
 extern "C" {
+    fn init() -> libc::c_int;
+
     fn version() -> libc::c_float;
     fn clean();
 //    fn update();
@@ -23,10 +25,13 @@ extern "C" {
 const VERSION: &str = "0.03";
 
 ///Checks if all dependencies are installed
-pub fn init() {
+pub fn init_spm() {
     if !std::path::Path::new("/lib/libspm.so").exists() {
         println!("LibSPM missing! Please install it!");
         println!("From here: https://github.com/Soviet-Linux/CCCP")
+    }
+    unsafe {
+        init();
     }
 }
 /// Gets the current version
