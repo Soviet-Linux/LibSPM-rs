@@ -4,7 +4,10 @@
 extern crate libc;
 // rust stuff version
 
-extern "C" {
+
+
+extern "C"  {
+
     fn init() -> libc::c_int;
 
     fn version() -> libc::c_float;
